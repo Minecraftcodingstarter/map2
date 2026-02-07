@@ -1,4 +1,4 @@
-import { GoogleGenAI, SchemaType } from "@google/genai"; // Hinweis: Nutze SchemaType statt Type für bessere Kompatibilität
+import { GoogleGenAI, Type } from "@google/genai";
 import { CategoryKey } from "../types";
 import { CATEGORIES } from "../constants";
 
@@ -14,18 +14,18 @@ export async function fetchGlobalCategoryData(category: CategoryKey): Promise<Re
   const genAI = new GoogleGenAI(apiKey);
   const cat = CATEGORIES[category];
   
-  // 'gemini-1.5-flash' ist stabil, extrem schnell und hat ein hohes Gratis-Limit
+  // Wir nutzen gemini-1.5-flash für maximale Stabilität
   const model = genAI.getGenerativeModel({ 
     model: "gemini-1.5-flash",
     generationConfig: {
       responseMimeType: "application/json",
       responseSchema: {
-        type: SchemaType.ARRAY,
+        type: Type.ARRAY,
         items: {
-          type: SchemaType.OBJECT,
+          type: Type.OBJECT,
           properties: {
-            code: { type: SchemaType.STRING },
-            value: { type: SchemaType.NUMBER }
+            code: { type: Type.STRING },
+            value: { type: Type.NUMBER }
           },
           required: ["code", "value"]
         }
@@ -41,7 +41,7 @@ export async function fetchGlobalCategoryData(category: CategoryKey): Promise<Re
   ANWEISUNGEN:
   1. Erstelle Daten für so viele Länder wie möglich (Ziel: 180+). 
   2. Verwende ISO-3166-1 alpha-3 Codes (z.B. DEU, USA, CHN).
-  3. Gib NUR das JSON-Array zurück.
+  3. Gib NUR das JSON-Array zurück. Keine Einleitung, kein Text.
   Format: [{"code": "USA", "value": 123.4}, ...]`;
 
   try {
