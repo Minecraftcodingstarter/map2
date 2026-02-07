@@ -11,7 +11,7 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     console.error("API Key fehlt! Bitte VITE_GEMINI_API_KEY in Vercel/Umgebungsvariablen setzen.");
     return {};
   }
-
+console.log("Gemini API Key:", apiKey ? "✅ Vorhanden" : "❌ Fehlt");
   const genAI = new GoogleGenAI(apiKey);
   const cat = CATEGORIES[category];
   
