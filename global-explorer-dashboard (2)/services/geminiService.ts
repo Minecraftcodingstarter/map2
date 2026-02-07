@@ -1,11 +1,11 @@
 
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { CategoryKey, DetailedInfo } from "../types";
 import { CATEGORIES } from "../constants";
 
 export async function fetchCountryDetails(countryName: string, category: CategoryKey): Promise<DetailedInfo> {
   // Fixed: Always create a new GoogleGenAI instance with the direct process.env.API_KEY right before making a call.
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY)
   const categoryLabel = CATEGORIES[category].label;
   const prompt = `Gib mir detaillierte Informationen über ${countryName} im Kontext von ${categoryLabel}. 
   Strukturiere die Antwort als JSON auf Deutsch.`;
