@@ -4,8 +4,8 @@ import { CATEGORIES } from "../constants";
 
 export async function fetchGlobalCategoryData(category: CategoryKey): Promise<Record<string, number>> {
   // WICHTIG: Nutze import.meta.env für Vite + VITE_ Präfix für Vercel
-  // Direkter API-Key im Code (NIEMALS machen!)
-const apiKey = "AIzaSyDeinEchterKey123";
+// Aus Umgebungsvariable lesen
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   
   if (!apiKey) {
     console.error("API Key fehlt! Bitte VITE_GEMINI_API_KEY in Vercel/Umgebungsvariablen setzen.");
