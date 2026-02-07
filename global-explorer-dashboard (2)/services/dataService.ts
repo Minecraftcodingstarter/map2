@@ -12,7 +12,7 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     return {};
   }
 console.log("Gemini API Key:", apiKey ? "✅ Vorhanden" : "❌ Fehlt");
-  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY); // ✅
+  const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY); 
   const cat = CATEGORIES[category];
   
   // Wir nutzen gemini-1.5-flash für maximale Stabilität
